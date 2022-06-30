@@ -31,28 +31,22 @@ class APIClient {
                     }
                 case .failure(let error):
                     self.printOriginalJson(with: response.data ?? Data())
-                    do {
-//                        let result = try JSONDecoder().decode(GenericErrorResponse.self, from: response.data ?? Data())
-//                        print(result)
-                        switch response.response?.statusCode {
-                        case 400:
-                            observer.onError(ApiError.badRequest(message: error.errorDescription))
-                        case 401:
-                            observer.onError(ApiError.unauthorized(message: error.errorDescription))
-                        case 403:
-                            observer.onError(ApiError.forbidden(message: error.errorDescription))
-                        case 404:
-                            observer.onError(ApiError.notFound(message: error.errorDescription))
-                        case 409:
-                            observer.onError(ApiError.conflict(message: error.errorDescription))
-                        case 422:
-                            observer.onError(ApiError.unProccesableEntity(message: error.errorDescription))
-                        case 500:
-                            observer.onError(ApiError.internalServerError(message: error.errorDescription))
-                        default:
-                            observer.onError(error)
-                        }
-                    } catch(let error) {
+                    switch response.response?.statusCode {
+                    case 400:
+                        observer.onError(ApiError.badRequest(message: error.errorDescription))
+                    case 401:
+                        observer.onError(ApiError.unauthorized(message: error.errorDescription))
+                    case 403:
+                        observer.onError(ApiError.forbidden(message: error.errorDescription))
+                    case 404:
+                        observer.onError(ApiError.notFound(message: error.errorDescription))
+                    case 409:
+                        observer.onError(ApiError.conflict(message: error.errorDescription))
+                    case 422:
+                        observer.onError(ApiError.unProccesableEntity(message: error.errorDescription))
+                    case 500:
+                        observer.onError(ApiError.internalServerError(message: error.errorDescription))
+                    default:
                         observer.onError(error)
                     }
                 }

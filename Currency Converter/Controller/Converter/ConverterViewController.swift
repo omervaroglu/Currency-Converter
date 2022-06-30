@@ -149,6 +149,7 @@ extension ConverterViewController {
     }
 }
 
+//MARK: - handleViewModelOutput
 extension ConverterViewController: ConverterViewModelDelegate {
     func handleViewModelOutput(_ output: ConverterViewModelOutput) {
         switch output {
@@ -164,6 +165,7 @@ extension ConverterViewController: ConverterViewModelDelegate {
     }
 }
 
+//MARK: - CollectionView
 extension ConverterViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.balanceList.count
